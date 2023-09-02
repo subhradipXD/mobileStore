@@ -12,7 +12,6 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="products.php">Products</a></li> <!-- Link to your product listing page -->
                 <li><a href="cart.php">Cart</a></li> <!-- Link to your shopping cart page -->
                 <li><a href="#">Contact</a></li>
             </ul>
