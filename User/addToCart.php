@@ -1,4 +1,5 @@
 <?php
+// Include your database connection code here
 include("../_dbConnect.php");
 
 // Validate and sanitize user input
@@ -9,10 +10,11 @@ if ($product_id === false || $quantity === false) {
     die('Invalid input');
 }
 
-// Check if the product is already in the cart
+// Check if the product is already in the user's cart
+$cart_id = $_SESSION['cart_id'];
 $sql = "SELECT quan FROM cartitems WHERE cartid = ? AND productid = ?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('ii', $_SESSION['cartid'], $product_id);
+$stmt->bind_param('ii', $cart_id, $product_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -20,7 +22,7 @@ if ($result->num_rows === 0) {
     // Product is not in the cart, insert it
     $sql = "INSERT INTO cartitems (cartid, productid, quan) VALUES (?, ?, ?)";
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('iii', $_SESSION['cartid'], $product_id, $quantity);
+    $stmt->bind_param('iii', $cart_id, $product_id, $quantity);
     $stmt->execute();
 } else {
     // Product is in the cart, update quantity
@@ -29,7 +31,7 @@ if ($result->num_rows === 0) {
 
     $sql = "UPDATE cartitems SET quan = ? WHERE cartid = ? AND productid = ?";
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('iii', $new_quantity, $_SESSION['cartid'], $product_id);
+    $stmt->bind_param('iii', $new_quantity, $cart_id, $product_id);
     $stmt->execute();
 }
 

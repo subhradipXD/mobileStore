@@ -40,6 +40,7 @@ if(isset($_POST['Submit']))
 
     if ($stmt->execute()) {
         echo "New record created successfully";
+		header("location: login.php");
     } else {
         echo "Error: " . $stmt->error;
     }

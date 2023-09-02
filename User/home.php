@@ -1,3 +1,24 @@
+<?php
+// Include your database connection code here
+
+include("../_dbConnect.php");
+
+if (!isset($_SESSION['user_id'])) {
+    // Redirect the user to the login page if they are not logged in
+    header("location: login.php");
+    exit();
+}
+
+// Retrieve user-specific information
+$user_id = $_SESSION['user_id'];
+$name = $_SESSION['name'];
+$email = $_SESSION['email'];
+
+echo $name;
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +43,9 @@
         <h2>Featured Products</h2>
 
         <?php
-        include("../_dbConnect.php"); // Include your database connection code
 
         // SQL query to retrieve product details
+
         $sql = "SELECT proid, name, price, quan, brand, proimage FROM product";
 
         // Execute the query
@@ -48,7 +69,7 @@
         }
 
         // Close the database connection
-        $mysqli->close();
+        // $mysqli->close();
         ?>
     </section>
 

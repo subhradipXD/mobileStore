@@ -1,9 +1,6 @@
 <?php
 include("../_dbConnect.php");
 
-
-$message = ""; // To store login messages
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailOrId = $_POST['email_or_id'];
     $password = $_POST['password'];
@@ -15,17 +12,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result && mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
         if ($password === $row['password']) {
-            $message = "Login successful!";
+            // Store user information in session
+            $_SESSION['user_id'] = $row['userid'];
+            $_SESSION['name'] = $row['name'];
+            $_SESSION['email'] = $row['email'];
+
+            // Create a unique cart for the user (if it doesn't exist)
+            if (!isset($_SESSION['cart_id'])) {
+                // Generate a unique cart ID for the user (e.g., user's ID + current timestamp)
+                $cart_id = $row['userid'] . '_' . time();
+
+                // Store the cart ID in the session
+                $_SESSION['cart_id'] = $cart_id;
+            }
+
+            // Redirect to the user's home page
+            header("location: home.php");
+            exit(); // Make sure to exit after redirecting
         } else {
-            $message = "Incorrect password.";
+            echo "Incorrect password.";
         }
     } else {
-        $message = "Account does not exist.";
+        echo "Account does not exist.";
     }
 }
 
 mysqli_close($conn);
 ?>
+
+
 
 
 
@@ -66,8 +81,6 @@ mysqli_close($conn);
         <a href="reg.php" style="font-weight: 200; text-decoration:none; color:blue;">Don't have an account?</a>
         <br>
     </form>
-
-    <?php echo $message; ?>
 
     <footer>
         &copy; <?php echo date("Y"); ?> Your Website. All rights reserved.
