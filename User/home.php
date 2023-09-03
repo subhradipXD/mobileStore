@@ -1,4 +1,4 @@
-<?php
+a<?php
 include("../_dbConnect.php");
 
 if (!isset($_SESSION['user_id'])) {
@@ -37,8 +37,9 @@ $result = mysqli_query($conn, $sql);
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
                 <li><a href="#">Contact</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
             </ul>
         </nav>
     </header>
@@ -59,7 +60,7 @@ $result = mysqli_query($conn, $sql);
                 if ($row['quan'] > 0) {
                     // Product is in stock, display price and add to cart button
                     echo '<p>Price: ₹' . $row['price'] . '</p>';
-                    echo '<form action="addToCart.php" method="get">';
+                    echo '<form action="cart.php" method="get">';
                     echo '<input type="hidden" name="product_id" value="' . $row['proid'] . '">';
                     echo '<button type="submit">Add to Cart</button>';
                     echo '</form>';

@@ -3,7 +3,6 @@ include("../_dbConnect.php");
 
 // Generate a random 3-digit number
 $randomNumber = (string)mt_rand(100, 999);
-$cartId = (string)mt_rand(1000, 9999);
 
 if(isset($_POST['Submit']))
 {
@@ -31,14 +30,12 @@ if(isset($_POST['Submit']))
     // Generate user ID
     $userID = substr($name, 0, 4) . $randomNumber;
 
-	$userCartId = $randomNumber.$cartId;
-
 	echo $userID;
 
 
     // Use prepared statement to insert data
-    $stmt = $conn->prepare("INSERT INTO users (userid, name, email, phno, address, dob, password, cartid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $userID, $name, $email, $phoneNo, $address, $dob, $password, $userCartId);
+    $stmt = $conn->prepare("INSERT INTO users (userid, name, email, phno, address, dob, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $userID, $name, $email, $phoneNo, $address, $dob, $password);
 
     if ($stmt->execute()) {
         echo "New record created successfully";
