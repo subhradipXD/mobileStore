@@ -25,7 +25,7 @@ if(isset($_POST['Submit']))
 
     if (mysqli_num_rows($result) > 0) {
         echo "Email or phone number already exists.";
-        exit;
+		header("location: reg.php");
     }
 
     // Generate user ID

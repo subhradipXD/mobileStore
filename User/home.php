@@ -1,6 +1,4 @@
 <?php
-// Include your database connection code here
-
 include("../_dbConnect.php");
 
 if (!isset($_SESSION['user_id'])) {
@@ -14,10 +12,11 @@ $user_id = $_SESSION['user_id'];
 $name = $_SESSION['name'];
 $email = $_SESSION['email'];
 
-echo $name;
+// Query to fetch products from the database
+$sql = "SELECT proid, name, price, quan, brand, proimage FROM product";
+$result = $mysqli->query($sql);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,33 +42,32 @@ echo $name;
         <h2>Featured Products</h2>
 
         <?php
-
-        // SQL query to retrieve product details
-
-        $sql = "SELECT proid, name, price, quan, brand, proimage FROM product";
-
-        // Execute the query
-        $result = $mysqli->query($sql);
-
-        // Check if there are any results
+        // Check if there are any products in the database
         if ($result->num_rows > 0) {
-            // Output each product's details
+            // Output each product's details using a loop
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="product">';
                 echo '<img src="' . $row['proimage'] . '" alt="' . $row['name'] . '">';
                 echo '<h3>' . $row['name'] . '</h3>';
-                echo '<p>Price: $' . $row['price'] . '</p>';
-                echo '<p>Available Quantity: ' . $row['quan'] . '</p>';
                 echo '<p>Brand: ' . $row['brand'] . '</p>';
-                echo '<a href="../User/addToCart.php?product_id=' . $row['proid'] . '">Add to Cart</a>';
+
+                if ($row['quan'] > 0) {
+                    // Product is in stock, display price and add to cart button
+                    echo '<p>Price: $' . $row['price'] . '</p>';
+                    echo '<form action="addToCart.php" method="get">';
+                    echo '<input type="hidden" name="product_id" value="' . $row['proid'] . '">';
+                    echo '<button type="submit">Add to Cart</button>';
+                    echo '</form>';
+                } else {
+                    // Product is out of stock
+                    echo '<p>Out of Stock</p>';
+                }
+
                 echo '</div>';
             }
         } else {
             echo 'No products found.';
         }
-
-        // Close the database connection
-        // $mysqli->close();
         ?>
     </section>
 
@@ -79,7 +77,7 @@ echo $name;
     </section>
 
     <footer>
-        <p>&copy; 2023 Mobile Store</p>
+        <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>
     </footer>
 </body>
 </html>

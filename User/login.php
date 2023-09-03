@@ -33,17 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Incorrect password.";
         }
     } else {
-        echo "Account does not exist.";
+        echo "Account does not exist. ";
+        echo '<a href="reg.php">Register Here</a>';
     }
 }
 
 mysqli_close($conn);
 ?>
 
-
-
-
-
+<!-- ... HTML for the login form ... -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,34 +54,34 @@ mysqli_close($conn);
 <body>
 
 <header>
-        <img src="path_to_your_logo.png" alt="Logo">
-        <nav>
-            <a href="home.php">Home</a>
-            <a href="about.php">About</a>
-            <a href="contact.php">Contact</a>
-        </nav>
-    </header>
+    <img src="path_to_your_logo.png" alt="Logo">
+    <nav>
+        <a href="home.php">Home</a>
+        <a href="about.php">About</a>
+        <a href="contact.php">Contact</a>
+    </nav>
+</header>
 
-    <h1>Please Login Here</h1>
+<h1>Please Login Here</h1>
 
-    <form action="login.php" method="post">
-        <br>
-        <label for="email_or_id">Enter Email or ID</label>
-        <input type="text" placeholder="Email or ID" name="email_or_id" required>
+<form action="login.php" method="post">
+    <br>
+    <label for="email_or_id">Enter Email or ID</label>
+    <input type="text" placeholder="Email or ID" name="email_or_id" required>
 
-        <label for="password">Enter Password</label>
-        <input type="password" placeholder="Password" name="password" required>
-        
-        <button type="submit">Login</button>
-        <br>
-        <a href="frgtpass.php" style="font-weight: 200; text-decoration:none; color:blue;">Forgot Password?</a>
-        <br>   
-        <a href="reg.php" style="font-weight: 200; text-decoration:none; color:blue;">Don't have an account?</a>
-        <br>
-    </form>
+    <label for="password">Enter Password</label>
+    <input type="password" placeholder="Password" name="password" required>
 
-    <footer>
-        &copy; <?php echo date("Y"); ?> Your Website. All rights reserved.
-    </footer>
+    <button type="submit">Login</button>
+    <br>
+    <a href="frgtpass.php" style="font-weight: 200; text-decoration:none; color:blue;">Forgot Password?</a>
+    <br>   
+    <a href="reg.php" style="font-weight: 200; text-decoration:none; color:blue;">Don't have an account? Register Here</a>
+    <br>
+</form>
+
+<footer>
+    &copy; <?php echo date("Y"); ?> Your Website. All rights reserved.
+</footer>
 </body>
 </html>
