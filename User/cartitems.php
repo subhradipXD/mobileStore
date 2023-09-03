@@ -17,7 +17,7 @@ $cart_id = $_SESSION['cart_id'];
 $sql = "SELECT ci.proid, p.name, p.price, ci.quan FROM cartitems ci
         JOIN product p ON ci.proid = p.proid
         WHERE ci.cartid = ?";
-$stmt = $mysqli->prepare($sql);
+$stmt = mysqli_prepare($conn, $sql);
 $stmt->bind_param('s', $cart_id);
 $stmt->execute();
 $result = $stmt->get_result();

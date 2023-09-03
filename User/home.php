@@ -13,8 +13,8 @@ $name = $_SESSION['name'];
 $email = $_SESSION['email'];
 
 // Query to fetch products from the database
-$sql = "SELECT proid, name, price, quan, brand, proimage FROM product";
-$result = $mysqli->query($sql);
+$sql = "SELECT * FROM product";
+$result = mysqli_query($conn, $sql);
 
 ?>
 
@@ -37,7 +37,7 @@ $result = $mysqli->query($sql);
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="cart.php">Cart</a></li> <!-- Link to your shopping cart page -->
+                <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
@@ -58,7 +58,7 @@ $result = $mysqli->query($sql);
 
                 if ($row['quan'] > 0) {
                     // Product is in stock, display price and add to cart button
-                    echo '<p>Price: $' . $row['price'] . '</p>';
+                    echo '<p>Price: ₹' . $row['price'] . '</p>';
                     echo '<form action="addToCart.php" method="get">';
                     echo '<input type="hidden" name="product_id" value="' . $row['proid'] . '">';
                     echo '<button type="submit">Add to Cart</button>';

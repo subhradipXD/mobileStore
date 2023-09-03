@@ -13,7 +13,7 @@ if (isset($_POST['addProduct'])) {
     $productBrand = $_POST['productBrand'];
 
     // Handle image upload
-    $targetDirectory = "productImages/"; // Directory to store uploaded images
+    $targetDirectory = "../uploadImage/"; // Directory to store uploaded images
     $targetFile = $targetDirectory . basename($_FILES["productImage"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
@@ -48,28 +48,43 @@ if (isset($_POST['updateProduct'])) {
     $newPrice = $_POST['newPrice'];
     $newQuantity = $_POST['newQuantity'];
 
-    // Perform the update query
+    $rowCount = "SELECT * from product where proid = '$updateProductID' ";
+
+    $query = mysqli_query($conn, $rowCount);
+    $row = mysqli_num_rows($query);
+
+    if($row == 0){
+        echo "error";
+    }else{
+        // Perform the update query
     $updateQuery = "UPDATE product SET price = '$newPrice', quan = '$newQuantity' WHERE proid = '$updateProductID'";
     
     if (mysqli_query($conn, $updateQuery)) {
         $message = "Product updated successfully";
-    } else {
-        $message = "Error updating product: " . mysqli_error($conn);
+    } 
     }
+    
 }
 
 // Delete product
 if (isset($_POST['deleteProduct'])) {
     $deleteProductID = $_POST['deleteProductID'];
 
-    // Perform the delete query
-    $deleteQuery = "DELETE FROM product WHERE proid = '$deleteProductID'";
+    $rowCount = "SELECT * from product where proid = '$deleteProductID' ";
+
+    $query = mysqli_query($conn, $rowCount);
+    $row = mysqli_num_rows($query);
+
+    if($row == 0){
+        echo "error";
+    }else{
+        $deleteQuery = "DELETE FROM product WHERE proid = '$deleteProductID'";
     
     if (mysqli_query($conn, $deleteQuery)) {
         $message = "Product deleted successfully";
-    } else {
-        $message = "Error deleting product: " . mysqli_error($conn);
+    } 
     }
+    
 }
 
 ?>

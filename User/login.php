@@ -1,9 +1,21 @@
 <?php
 include("../_dbConnect.php");
 
+include("reCAPTCHA.php");
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailOrId = $_POST['email_or_id'];
     $password = $_POST['password'];
+
+    $secretKey = $reCAP;
+    $resposnseKey = $_POST['g-recaptcha-response'];
+    $UserIP = $_SERVER['REMOTE_ADDR'];
+    $url="https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$resposnseKey&remoteip=$UserIP";
+
+    $response = file_get_contents($url);
+    $response = json_decode($response);
+
+    if($response->success) {
 
     // Check if the email or ID exists in the database
     $query = "SELECT * FROM users WHERE email = '$emailOrId' OR userid = '$emailOrId'";
@@ -36,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Account does not exist. ";
         echo '<a href="reg.php">Register Here</a>';
     }
+}else{
+    echo "CAPTCHA Failed!";
+}
 }
 
 mysqli_close($conn);
@@ -50,6 +65,11 @@ mysqli_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="logins.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</script>
+</script>
+
 </head>
 <body>
 
@@ -71,6 +91,8 @@ mysqli_close($conn);
 
     <label for="password">Enter Password</label>
     <input type="password" placeholder="Password" name="password" required>
+
+    <div class="g-recaptcha" data-sitekey="6LegHPcnAAAAAMQEyuMAjp3eBKJJmaXLRyBAii3g"></div>
 
     <button type="submit">Login</button>
     <br>
