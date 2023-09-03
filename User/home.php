@@ -20,11 +20,16 @@ $result = $mysqli->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+<!-- ... rest of your HTML code ... -->
+
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Store</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file here -->
+    <link rel="stylesheet" href="#"> <!-- Add your CSS file here -->
 </head>
 <body>
     <header>
