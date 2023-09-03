@@ -1,22 +1,22 @@
-a<?php
-include("../_dbConnect.php");
+<?php
+    include("../_dbConnect.php");
 
-if (!isset($_SESSION['user_id'])) {
-    // Redirect the user to the login page if they are not logged in
-    header("location: login.php");
-    exit();
-}
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect the user to the login page if they are not logged in
+        header("location: login.php");
+        exit();
+    }
 
-// Retrieve user-specific information
-$user_id = $_SESSION['user_id'];
-$name = $_SESSION['name'];
-$email = $_SESSION['email'];
+    // Retrieve user-specific information
+    $user_id = $_SESSION['user_id'];
+    $name = $_SESSION['name'];
+    $email = $_SESSION['email'];
 
-// Query to fetch products from the database
-$sql = "SELECT * FROM product";
-$result = mysqli_query($conn, $sql);
+    // Query to fetch products from the database
+    $sql = "SELECT * FROM product";
+    $result = mysqli_query($conn, $sql);
 
-?>
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,12 +25,14 @@ $result = mysqli_query($conn, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Store</title>
     <link rel="stylesheet" href="#"> <!-- Add your CSS file here -->
 </head>
+
 <body>
     <header>
         <h1>Welcome to Mobile Store</h1>
@@ -86,4 +88,5 @@ $result = mysqli_query($conn, $sql);
         <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>
     </footer>
 </body>
+
 </html>
