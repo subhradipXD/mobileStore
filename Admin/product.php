@@ -13,8 +13,8 @@ if (isset($_POST['addProduct'])) {
     $productBrand = $_POST['productBrand'];
 
     // Handle image upload
-    $targetDirectory = "uploadImage/"; // Directory to store uploaded images
-    $targetFile = $targetDirectory . basename($_FILES["uploadImage"]["name"]);
+    $targetDirectory = "productImages/"; // Directory to store uploaded images
+    $targetFile = $targetDirectory . basename($_FILES["productImage"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
     // Check if the image file is a valid type (you can add more image formats if needed)
