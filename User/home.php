@@ -51,9 +51,9 @@
 
         <?php
         // Check if there are any products in the database
-        if ($result->num_rows > 0) {
+        if (mysqli_num_rows($result) > 0) {
             // Output each product's details using a loop
-            while ($row = $result->fetch_assoc()) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class="product">';
                 echo '<img src="' . $row['proimage'] . '" alt="' . $row['name'] . '">';
                 echo '<h3>' . $row['name'] . '</h3>';
