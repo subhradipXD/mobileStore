@@ -37,7 +37,7 @@ if (isset($_POST['addProduct'])) {
             // Move the uploaded image to the target directory
             if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $targetFile)) {
                 $message = "Product added successfully";
-                echo "Product Id is $proID";
+                $pid = "Product Id is $proID";
             } else {
                 $message = "Error moving uploaded file.";
             }
@@ -81,7 +81,7 @@ if (isset($_POST['deleteProduct'])) {
     $row = mysqli_num_rows($query);
 
     if($row == 0){
-        echo "error";
+        echo "no product exist";
     }else{
         $deleteQuery = "DELETE FROM product WHERE proid = '$deleteProductID'";
     
@@ -100,11 +100,18 @@ if (isset($_POST['deleteProduct'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <!-- Add your CSS styles here -->
+    <link rel="stylesheet" type="text/css" href="product.css">
 </head>
 <body>
 
 <h1>Welcome to the Admin Panel</h1>
+
+<p>
+    <?php echo $message ."<br>".$pid; 
+
+?>
+</p>
+
 
 <!-- Add Product Form -->
 <form method="post" enctype="multipart/form-data">
@@ -151,7 +158,6 @@ if (isset($_POST['deleteProduct'])) {
     <button type="submit" name="deleteProduct">Delete Product</button>
 </form>
 
-<p><?php echo $message; ?></p>
 
 <!-- Other code for updating and deleting products -->
 <button><a href="logout.php">Log Out</a></button>

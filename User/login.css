@@ -13,16 +13,6 @@ body {
   position: relative;
 }
 
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.2); /* Add a transparent white background for the frosted glass effect */
-  border: 1px solid rgba(0, 0, 0, 0.2); /* Add a subtle border */
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 header {
   text-align: center;
   margin-bottom: 20px;
@@ -30,63 +20,68 @@ header {
 
 header img {
   max-width: 100px;
+  padding-top: 20px;
 }
 
 /* Navigation bar styles */
 nav {
   background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
   padding: 10px 0;
-  padding-bottom: 20px;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-nav ul {
-  list-style: none;
-  text-align: center;
-}
 
-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-nav ul li a {
+nav a {
   text-decoration: none;
   color: #fff;
   font-weight: bold;
+  margin-right: 20px;
   transition: color 0.3s ease;
+  display: inline;
 }
 
-nav ul li a:hover {
+nav a:hover {
   color: #007bff; /* Change color on hover */
-  text-decoration: underline;
 }
 
 /* Form styles */
-.box {
-  margin-bottom: 20px;
+h1 {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.fontLabel {
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.2); /* Add a transparent white background for the frosted glass effect */
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Add a subtle border */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+label {
   font-weight: bold;
 }
 
-.iconBox {
-  float: left;
-  margin-right: 10px;
-}
-
-.textBox {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 3px;
   outline: none;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.5); /* Add a transparent white background for input fields */
 }
 
-.submit {
+.g-recaptcha {
+  margin: 10px 0;
+}
+
+button[type="submit"] {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -96,20 +91,16 @@ nav ul li a:hover {
   font-size: 16px;
 }
 
-.submit:hover {
+button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-button a {
+a {
+  font-weight: 200;
   text-decoration: none;
-  color: #007bff;
-}
-
-/* Error message styles */
-p {
-  color: #f00;
-  font-weight: bold;
-  margin-bottom: 10px;
+  color: blue;
+  display: block;
+  margin-top: 10px;
 }
 
 /* Footer */

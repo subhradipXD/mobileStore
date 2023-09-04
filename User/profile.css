@@ -1,0 +1,84 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  /* Navigation bar styles */
+  nav {
+    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
+    padding: 10px 0;
+  }
+  
+  nav ul {
+    list-style: none;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 20px; 
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #007bff; /* Change color on hover */
+  }
+  
+  /* Section styles */
+  .user-profile {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .user-profile h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .user-profile p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile img {
+    max-width: 200px;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 50%; /* Make the profile picture round */
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    color: #fff;
+  }
+  

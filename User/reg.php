@@ -8,40 +8,57 @@ $errorMsg = "";
 $randomNumber = (string) mt_rand(100, 999);
 
 if (isset($_POST['Submit'])) {
-    $name = $_POST["Name"];
-    $email = $_POST["email"];
-    $phoneNo = $_POST["phoneNo"];
-    $address = $_POST["address"];
-    $dob = $_POST["DOB"];
-    $password = $_POST["password"];
-    $confirmPassword = $_POST["confirmPassword"]; // Added field for confirm password
+	$name = $_POST["Name"];
+	$email = $_POST["email"];
+	$phoneNo = $_POST["phoneNo"];
+	$address = $_POST["address"];
+	$dob = $_POST["DOB"];
+	$password = $_POST["password"];
+	$confirmPassword = $_POST["confirmPassword"]; // Added field for confirm password
 
-    if ($password !== $confirmPassword) {
-        $errorMsg = "Passwords do not match.";
-    } else {
-        $checkQuery = "SELECT * FROM users WHERE email = '$email' OR phno = '$phoneNo'";
-        $result = mysqli_query($conn, $checkQuery);
+	// Handle profile picture upload
+	// $profilePicture = ""; // Initialize with a default blank image
 
-        if (mysqli_num_rows($result) > 0) {
-            $errorMsg = "Email or phone number already exists.";
-        } else {
-            // Generate user ID
-            $userID = substr($name, 0, 4) . $randomNumber;
+	// if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK) {
+	//     $uploadDir = "profile_pictures/"; // Directory to store uploaded profile pictures
+	//     $uploadedFile = $_FILES['profilePicture']['tmp_name'];
+	//     $fileExtension = pathinfo($_FILES['profilePicture']['name'], PATHINFO_EXTENSION);
+	//     $profilePicture = $userID . "." . $fileExtension; // Unique file name based on user ID
 
-            // Use prepared statement to insert data
-            $stmt = $conn->prepare("INSERT INTO users (userid, name, email, phno, address, dob, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssss", $userID, $name, $email, $phoneNo, $address, $dob, $password);
+	//     // Move the uploaded file to the desired directory
+	//     if (move_uploaded_file($uploadedFile, $uploadDir . $profilePicture)) {
+	//         // File uploaded successfully, now you can store $profilePicture in the database
+	//     } else {
+	//         $errorMsg = "Error uploading profile picture.";
+	//     }
+	// }
 
-            if ($stmt->execute()) {
-                // Redirect after successful registration
-                header("location: login.php");
-            } else {
-                $errorMsg = "Error: " . $stmt->error;
-            }
+	if ($password !== $confirmPassword) {
+		$errorMsg = "Passwords do not match.";
+	} else {
+		$checkQuery = "SELECT * FROM users WHERE email = '$email' OR phno = '$phoneNo'";
+		$result = mysqli_query($conn, $checkQuery);
 
-            $stmt->close();
-        }
-    }
+		if (mysqli_num_rows($result) > 0) {
+			$errorMsg = "Email or phone number already exists.";
+		} else {
+			// Generate user ID
+			$userID = substr($name, 0, 4) . $randomNumber;
+
+			// Use prepared statement to insert data
+			$stmt = $conn->prepare("INSERT INTO users (userid, name, email, phno, address, dob, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			$stmt->bind_param("sssssss", $userID, $name, $email, $phoneNo, $address, $dob, $password);
+
+			if ($stmt->execute()) {
+				// Redirect after successful registration
+				header("location: login.php");
+			} else {
+				$errorMsg = "Error: " . $stmt->error;
+			}
+
+			$stmt->close();
+		}
+	}
 }
 ?>
 
@@ -51,16 +68,31 @@ if (isset($_POST['Submit'])) {
 
 <head>
 	<meta charset="utf-8">
-	<title>Form</title>
+	<title>UserRegistration</title>
+	<link rel="stylesheet" type="text/css" href="regs.css">
+
 </head>
 
 <body>
 
+	<header id="head">
+		<nav>
+			<ul>
+				<li><a href="../WSPage/index.php">Home</a></li>
+				<li><a href="../WSPage/contact.php">Contact</a></li>
+				<li><a href="../WSPage/about.php">About Us</a></li>
+			</ul>
+		</nav>
+		<img src="logo\1.png" alt="Logo">
+		<h1>Welcome to Mobile Book</h1>
+
+	</header>
+
 	<div class="container">
 		<!-- Display error message if there is one -->
-        <?php if (!empty($errorMsg)) : ?>
-            <p><?php echo $errorMsg; ?></p>
-        <?php endif; ?>
+		<?php if (!empty($errorMsg)) : ?>
+			<p><?php echo $errorMsg; ?></p>
+		<?php endif; ?>
 		<form method="post" autocomplete="on">
 			<!--Name-->
 			<div class="box">
@@ -75,7 +107,19 @@ if (isset($_POST['Submit'])) {
 			</div>
 			<!--Name-->
 
-			<!---Phone No.------>
+			<!-- Add this input field for profile picture upload -->
+			<div class="box">
+				<label for="profilePicture" class="fl fontLabel"> Profile Picture: </label>
+				<div class="fl iconBox"><i class="fa fa-image" aria-hidden="true"></i></div>
+				<div class="fr">
+					<input type="file" name="profilePicture" accept="image/*">
+				</div>
+				<div class="clr"></div>
+			</div>
+			<!-- End of profile picture upload field -->
+
+
+			<!--- Phone No.---->
 			<div class="box">
 				<label for="phone" class="fl fontLabel"> Phone No.: </label>
 				<div class="fl iconBox"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
@@ -147,12 +191,17 @@ if (isset($_POST['Submit'])) {
 				<input type="Submit" name="Submit" class="submit" value="SUBMIT">
 			</div>
 			<!---Submit Button----->
-			
+
 			<div class="box">
 				<button><a href="login.php">LOG IN</a></button>
 			</div>
 		</form>
 	</div>
 	<!--Body of Form ends--->
+
+	<footer>
+    &copy; <?php echo date("Y"); ?> Your Website. All rights reserved.
+</footer>
 </body>
+
 </html>

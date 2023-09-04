@@ -30,25 +30,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Store</title>
-    <link rel="stylesheet" href="#"> <!-- Add your CSS file here -->
+    <link rel="stylesheet" href="home.css"> <!-- Add your CSS file here -->
 </head>
 
 <body>
     <header>
-        <h1>Welcome to Mobile Store</h1>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About Us</a></li>
+                <li><a href="profile.php"><img src="">Profile</a></li>
                 <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
                 <li><a href="logout.php">Log Out</a></li>
             </ul>
         </nav>
+        <img src="logo\1.png" alt="Logo">
+        <h1>Welcome to Mobile Book</h1>
     </header>
-
+    <h2 id="fp">Featured Products</h2>
     <section class="featured-products">
-        <h2>Featured Products</h2>
 
         <?php
         // Check if there are any products in the database
@@ -81,7 +82,7 @@
     </section>
 
     <section class="about-us">
-        <h2>About Us</h2>
+        <a href="../WSPage/about.php"><h2>About Us</h2></a>
         <p>We offer a wide range of mobile phones and accessories. Shop with us for the latest smartphones at great prices.</p>
     </section>
 

@@ -12,6 +12,6 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if(!$conn){
     echo "Connection is not established<br>";
 }else{
-    echo "connection is established<br>";
+    // echo "connection is established<br>";
 }
 ?>
