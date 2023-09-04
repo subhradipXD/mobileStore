@@ -1,11 +1,13 @@
 <?php
 include("../_dbConnect.php");
 
-// Generate a random 3-digit number
-$randomNumber = (string)mt_rand(100, 999);
+// Initialize error message
+$errorMsg = "";
 
-if(isset($_POST['Submit']))
-{
+// Generate a random 3-digit number
+$randomNumber = (string) mt_rand(100, 999);
+
+if (isset($_POST['Submit'])) {
     $name = $_POST["Name"];
     $email = $_POST["email"];
     $phoneNo = $_POST["phoneNo"];
@@ -15,38 +17,34 @@ if(isset($_POST['Submit']))
     $confirmPassword = $_POST["confirmPassword"]; // Added field for confirm password
 
     if ($password !== $confirmPassword) {
-        echo "Passwords do not match.";
-        exit;
-    }
-
-	$checkQuery = "SELECT * FROM users WHERE email = '$email' OR phno = '$phoneNo'";
-    $result = mysqli_query($conn, $checkQuery);
-
-    if (mysqli_num_rows($result) > 0) {
-        echo "Email or phone number already exists.";
-		header("location: reg.php");
-    }
-
-    // Generate user ID
-    $userID = substr($name, 0, 4) . $randomNumber;
-
-	echo $userID;
-
-
-    // Use prepared statement to insert data
-    $stmt = $conn->prepare("INSERT INTO users (userid, name, email, phno, address, dob, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssss", $userID, $name, $email, $phoneNo, $address, $dob, $password);
-
-    if ($stmt->execute()) {
-        echo "New record created successfully";
-		header("location: login.php");
+        $errorMsg = "Passwords do not match.";
     } else {
-        echo "Error: " . $stmt->error;
-    }
+        $checkQuery = "SELECT * FROM users WHERE email = '$email' OR phno = '$phoneNo'";
+        $result = mysqli_query($conn, $checkQuery);
 
-    $stmt->close();
+        if (mysqli_num_rows($result) > 0) {
+            $errorMsg = "Email or phone number already exists.";
+        } else {
+            // Generate user ID
+            $userID = substr($name, 0, 4) . $randomNumber;
+
+            // Use prepared statement to insert data
+            $stmt = $conn->prepare("INSERT INTO users (userid, name, email, phno, address, dob, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssss", $userID, $name, $email, $phoneNo, $address, $dob, $password);
+
+            if ($stmt->execute()) {
+                // Redirect after successful registration
+                header("location: login.php");
+            } else {
+                $errorMsg = "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
+        }
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -59,6 +57,10 @@ if(isset($_POST['Submit']))
 <body>
 
 	<div class="container">
+		<!-- Display error message if there is one -->
+        <?php if (!empty($errorMsg)) : ?>
+            <p><?php echo $errorMsg; ?></p>
+        <?php endif; ?>
 		<form method="post" autocomplete="on">
 			<!--Name-->
 			<div class="box">
@@ -145,6 +147,10 @@ if(isset($_POST['Submit']))
 				<input type="Submit" name="Submit" class="submit" value="SUBMIT">
 			</div>
 			<!---Submit Button----->
+			
+			<div class="box">
+				<button><a href="login.php">LOG IN</a></button>
+			</div>
 		</form>
 	</div>
 	<!--Body of Form ends--->

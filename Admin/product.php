@@ -1,6 +1,11 @@
 <?php
 include("../_dbConnect.php");
 
+if (!isset($_SESSION['admin_id'])) {
+    header("location: admin.php"); // Replace 'admin.php' with the actual login page URL
+    exit();
+}
+
 // Initialize variables
 $message = "";
 $randomNumber = (string)mt_rand(100, 999);
@@ -149,6 +154,11 @@ if (isset($_POST['deleteProduct'])) {
 <p><?php echo $message; ?></p>
 
 <!-- Other code for updating and deleting products -->
+<button><a href="logout.php">Log Out</a></button>
+<?php
+
+
+?>
 
 </body>
 </html>

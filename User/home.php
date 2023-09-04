@@ -42,6 +42,7 @@
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
+                <li><a href="logout.php">Log Out</a></li>
             </ul>
         </nav>
     </header>

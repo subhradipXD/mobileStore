@@ -20,10 +20,12 @@ $cartQuery = "SELECT cartid FROM cart WHERE userid = '$user_id'";
 $result = mysqli_query($conn, $cartQuery);
 
 if (mysqli_num_rows($result) > 0) {
+
     // If a cart already exists, retrieve the cart ID
     $row = mysqli_fetch_assoc($result);
     $cart_id = $row['cartid'];
-    echo '<form action="addToCart.php" method="get">';
+    echo '<form action="addToCart.php" method="GET">';
+
 } else {
     // If a cart doesn't exist, generate a new cart ID
     $randomNumber = (string)mt_rand(100, 999);
@@ -34,7 +36,7 @@ if (mysqli_num_rows($result) > 0) {
 
     if (mysqli_query($conn, $insertCartQuery)) {
         // The cart has been created successfully, now you can proceed with adding products to the cart.
-        echo '<form action="addToCart.php" method="get">';
+        echo '<form action="addToCart.php" method="GET">';
     } else {
         echo 'Error creating the cart.';
     }

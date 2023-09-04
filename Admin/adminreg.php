@@ -3,7 +3,7 @@ include("../_dbConnect.php");
 $randomNumber = (string)mt_rand(100, 999);
 
 if (isset($_POST['Submit'])) {
-    $adminID = mt_rand(100, 999);
+    $adminID = substr($_POST["AdminName"], 0, 4) . $randomNumber;
     $adminName = $_POST["AdminName"];
     $adminEmail = $_POST["AdminEmail"];
     $adminPhoneNo = $_POST["AdminPhoneNo"];
@@ -11,33 +11,29 @@ if (isset($_POST['Submit'])) {
     $adminConfirmPassword = $_POST["AdminConfirmPassword"];
 
     if ($adminPassword !== $adminConfirmPassword) {
-        echo "Passwords do not match.";
-        exit;
-    }
-
-    // Check if admin email or phone number already exists
-    $checkQuery = "SELECT * FROM adminreg WHERE ademail = '$adminEmail' OR adphno = '$adminPhoneNo'";
-    $result = mysqli_query($conn, $checkQuery);
-
-    if (mysqli_num_rows($result) > 0) {
-        echo "Admin with this email or phone number already exists.";
-        exit;
-    }
-
-    $adminID = substr($adminName, 0, 4) . $randomNumber;
-
-    // Use prepared statement to insert admin data
-    $stmt = $conn->prepare("INSERT INTO adminreg (adid, adname, ademail, adphno, adpassword) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $adminID, $adminName, $adminEmail, $adminPhoneNo, $adminPassword);
-
-    if ($stmt->execute()) {
-        echo "Admin registration successful";
-        
+        $errorMsg = "Passwords do not match.";
     } else {
-        echo "Error: " . $stmt->error;
-    }
+        // Check if admin email or phone number already exists
+        $checkQuery = "SELECT * FROM adminreg WHERE ademail = '$adminEmail' OR adphno = '$adminPhoneNo'";
+        $result = mysqli_query($conn, $checkQuery);
 
-    $stmt->close();
+        if (mysqli_num_rows($result) > 0) {
+            $errorMsg = "Admin with this email or phone number already exists.";
+        } else {
+            // Use prepared statement to insert admin data
+            $stmt = $conn->prepare("INSERT INTO adminreg (adid, adname, ademail, adphno, adpassword) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $adminID, $adminName, $adminEmail, $adminPhoneNo, $adminPassword);
+
+            if ($stmt->execute()) {
+                // Redirect after successful registration
+                header("location: admin.php");
+            } else {
+                $errorMsg = "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
+        }
+    }
 }
 ?>
 
@@ -47,11 +43,16 @@ if (isset($_POST['Submit'])) {
 <head>
     <meta charset="utf-8">
     <title>Admin Registration</title>
+    <link rel="stylesheet" type="text/css" href="your-css-file.css">
 </head>
 
 <body>
 
     <div class="container">
+        <!-- Display error message if there is one -->
+        <?php if (!empty($errorMsg)) : ?>
+            <p><?php echo $errorMsg; ?></p>
+        <?php endif; ?>
         <form method="post" autocomplete="on">
             <!--Admin Name-->
             <div class="box">
@@ -115,6 +116,12 @@ if (isset($_POST['Submit'])) {
                 <input type="Submit" name="Submit" class="submit" value="REGISTER">
             </div>
             <!--Submit Button-->
+
+            <!-- Login Button Redirecting to admin.php -->
+        <div class="box">
+            Already have an account?
+            <a href="admin.php">Login</a>
+        </div>
         </form>
     </div>
 

@@ -12,7 +12,7 @@ if ($product_id === false) {
 // Check if the user is logged in and has an active cart
 // session_start();
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['cart_id'])) {
+if (!isset($_GET['user_id']) || !isset($_GET['cart_id'])) {
     // Redirect the user to an appropriate page (e.g., the homepage) with an error message
     header('Location: home.php?error=not_logged_in');
     exit();
