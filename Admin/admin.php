@@ -52,19 +52,14 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <link rel="stylesheet" type="text/css" href="logins.css">
+    <link rel="stylesheet" type="text/css" href="admin.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
-    <header>
-        <img src="path_to_your_logo.png" alt="Logo">
-        <nav>
-            <a href="admin_home.php">Admin Home</a>
-            <a href="admin_dashboard.php">Admin Dashboard</a>
-            <a href="admin_contact.php">Admin Contact</a>
-        </nav>
-    </header>
+    
+    <img src="../User/logo/1.png" alt="Logo">
+
 
     <h1>Admin Login</h1>
 

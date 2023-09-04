@@ -8,6 +8,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 // Initialize variables
 $message = "";
+$pid = "";
 $randomNumber = (string)mt_rand(100, 999);
 
 // Add product

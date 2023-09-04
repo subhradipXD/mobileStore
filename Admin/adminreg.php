@@ -43,10 +43,11 @@ if (isset($_POST['Submit'])) {
 <head>
     <meta charset="utf-8">
     <title>Admin Registration</title>
-    <link rel="stylesheet" type="text/css" href="your-css-file.css">
+    <link rel="stylesheet" type="text/css" href="adminreg.css">
 </head>
 
 <body>
+<img src="../User/logo/1.png" alt="Logo">
 
     <div class="container">
         <!-- Display error message if there is one -->
