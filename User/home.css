@@ -8,7 +8,10 @@
 /* Global styles */
 body {
   font-family: Arial, sans-serif;
+  background-image: url("logo/bg.jpg");
+  background-size: cover;
   position: relative;
+  background-attachment: fixed;
 }
 
 #fp{
@@ -20,14 +23,22 @@ header {
   margin-bottom: 20px;
 }
 
+.image{
+  padding-top: 80px;
+}
+
 header img {
-  max-width: 100px;
+    max-width: 100px;
 }
 
 /* Navigation bar styles */
 nav {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 1);
   padding: 10px 0;
+  position: fixed; /* Make the navigation bar sticky */
+  width: 100%; /* Ensure it spans the full width of the viewport */
+  top: 0; /* Position it at the top of the viewport */
+  z-index: 100; /* Ensure it's above other content */
 }
 
 nav ul {

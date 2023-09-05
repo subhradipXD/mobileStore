@@ -64,7 +64,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="logins.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </script>
@@ -79,7 +79,7 @@ mysqli_close($conn);
         <a href="../WSPage/about.php">About</a>
         <a href="../WSPage/contact.php">Contact</a>
     </nav>
-    <img src="logo\2.png" alt="Logo">
+    <img src="logo\2.png" alt="Logo" class="image">
 </header>
 
 <h1>Please Login Here</h1>

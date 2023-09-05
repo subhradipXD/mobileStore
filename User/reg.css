@@ -8,9 +8,10 @@
 /* Global styles */
 body {
   font-family: Arial, sans-serif;
-  background-image: url('logo/bg.png'); /* Replace with your background image */
+  background-image: url('logo/bg2.jpg'); /* Replace with your background image */
   background-size: cover;
   position: relative;
+  /* background: fixed; */
 }
 
 .container {
@@ -28,6 +29,10 @@ header {
   margin-bottom: 20px;
 }
 
+.image{
+  padding-top: 70px;
+}
+
 header img {
   max-width: 100px;
 }
@@ -36,8 +41,12 @@ header img {
 nav {
   background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
   padding: 10px 0;
-  padding-bottom: 20px;
   padding-top: 20px;
+  padding-bottom: 20px;
+  position: fixed; /* Make the navigation bar sticky */
+  width: 100%; /* Ensure it spans the full width of the viewport */
+  top: 0; /* Position it at the top of the viewport */
+  z-index: 100; /* Ensure it's above other content */
 }
 
 nav ul {
@@ -55,6 +64,11 @@ nav ul li a {
   color: #fff;
   font-weight: bold;
   transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #007bff; /* Change color on hover */
+  text-decoration: underline;
 }
 
 nav ul li a:hover {

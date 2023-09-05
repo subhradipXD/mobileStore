@@ -69,7 +69,7 @@ if (isset($_POST['Submit'])) {
 <head>
 	<meta charset="utf-8">
 	<title>UserRegistration</title>
-	<link rel="stylesheet" type="text/css" href="regs.css">
+	<link rel="stylesheet" type="text/css" href="reg.css">
 
 </head>
 
@@ -83,7 +83,7 @@ if (isset($_POST['Submit'])) {
 				<li><a href="../WSPage/about.php">About Us</a></li>
 			</ul>
 		</nav>
-		<img src="logo\1.png" alt="Logo">
+		<img src="logo\1.png" alt="Logo" class="image">
 		<h1>Welcome to Mobile Book</h1>
 
 	</header>

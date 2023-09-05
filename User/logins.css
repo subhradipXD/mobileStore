@@ -8,7 +8,7 @@
 /* Global styles */
 body {
   font-family: Arial, sans-serif;
-  background-image: url('logo/bg.png'); /* Replace with your background image */
+  background-image: url('logo/bg3.jpg'); /* Replace with your background image */
   background-size: cover;
   position: relative;
 }
@@ -23,14 +23,21 @@ header img {
   padding-top: 20px;
 }
 
+.image{
+  padding-top: 70px;
+}
+
 /* Navigation bar styles */
 nav {
   background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
   padding: 10px 0;
   padding-top: 20px;
   padding-bottom: 20px;
+  position: fixed; /* Make the navigation bar sticky */
+  width: 100%; /* Ensure it spans the full width of the viewport */
+  top: 0; /* Position it at the top of the viewport */
+  z-index: 100; /* Ensure it's above other content */
 }
-
 
 nav a {
   text-decoration: none;
@@ -40,6 +47,7 @@ nav a {
   transition: color 0.3s ease;
   display: inline;
 }
+
 
 nav a:hover {
   color: #007bff; /* Change color on hover */

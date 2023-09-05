@@ -35,17 +35,19 @@
 
 <body>
     <header>
+        <div id="navbar">
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="../WSPage/contact.php">Contact</a></li>
+                <li><a href="../WSPage/about.php">About Us</a></li>
                 <li><a href="profile.php"><img src="">Profile</a></li>
                 <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
                 <li><a href="logout.php">Log Out</a></li>
             </ul>
         </nav>
-        <img src="logo\1.png" alt="Logo">
+        </div>
+        <img src="logo\1.png" alt="Logo" class="image">
         <h1>Welcome to Mobile Book</h1>
     </header>
     <h2 id="fp">Featured Products</h2>
