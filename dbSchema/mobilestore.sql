@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2023 at 06:52 PM
+-- Generation Time: Sep 10, 2023 at 02:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,16 @@ CREATE TABLE `adminreg` (
   `adpassword` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `adminreg`
+--
+
+INSERT INTO `adminreg` (`adid`, `adname`, `ademail`, `adphno`, `adpassword`) VALUES
+('Admi517', 'Admin', 'subhradipdas69@gmail.com', '9635760356', '12345'),
+('new364', 'new', 'me@gmail.com', '6789032156', '12345'),
+('Subh290', 'Subhratb', 'subhradipdas@gmail.com', '9635760312', '12345'),
+('Subh809', 'Subhra', 'subhradipdas6969@gmail.com', '9635760319', '12345');
+
 -- --------------------------------------------------------
 
 --
@@ -45,24 +55,6 @@ CREATE TABLE `cart` (
   `cartid` varchar(255) NOT NULL,
   `userid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cartid`, `userid`) VALUES
-('Subh468351', 'Subh468'),
-('Subh468372', 'Subh468'),
-('Subh468399', 'Subh468'),
-('Subh468428', 'Subh468'),
-('Subh468487', 'Subh468'),
-('Subh468529', 'Subh468'),
-('Subh468532', 'Subh468'),
-('Subh468569', 'Subh468'),
-('Subh468767', 'Subh468'),
-('Subh468775', 'Subh468'),
-('Subh468906', 'Subh468'),
-('Subh468948', 'Subh468');
 
 -- --------------------------------------------------------
 
@@ -97,7 +89,27 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`proid`, `name`, `price`, `quan`, `brand`, `proimage`) VALUES
-('phon579', 'phone', 12000, 23, 'xiome', '../uploadImage/1.png');
+('mobi612', 'mobile', 12345, 23, 'realme', '../uploadImage/3.png'),
+('phon579', 'phone', 12000, 23, 'xiome', '../uploadImage/1.png'),
+('phon758', 'phone', 12389, 23, 'xiome', '../uploadImage/2.png'),
+('smar203', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar283', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar289', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar351', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar379', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar382', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar403', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar460', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar553', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar601', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar612', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar703', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar720', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar810', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar836', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar930', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar965', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
+('smar988', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png');
 
 -- --------------------------------------------------------
 
@@ -112,15 +124,16 @@ CREATE TABLE `users` (
   `phno` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `dob` date NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `propic` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userid`, `name`, `email`, `phno`, `address`, `dob`, `password`) VALUES
-('Subh468', 'Subhradip Das', 'subhradipdas6969@gmail.com', '9635760319', 'none', '2023-08-30', '12345');
+INSERT INTO `users` (`userid`, `name`, `email`, `phno`, `address`, `dob`, `password`, `propic`) VALUES
+('Subh576', 'Subhradip Das', 'subhradipdas6969@gmail.com', '9635760319', 'none', '2023-09-04', '12345', '');
 
 --
 -- Indexes for dumped tables
@@ -138,7 +151,8 @@ ALTER TABLE `adminreg`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cartid`),
+  ADD PRIMARY KEY (`cartid`,`userid`),
+  ADD UNIQUE KEY `cartid` (`cartid`,`userid`),
   ADD KEY `userid` (`userid`);
 
 --
