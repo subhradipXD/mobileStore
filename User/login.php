@@ -45,8 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Incorrect password.";
         }
     } else {
-        echo "Account does not exist. ";
-        echo '<a href="reg.php">Register Here</a>';
+        $errorMessage = "Account does not exist";
     }
 }else{
     echo "CAPTCHA Failed!";
@@ -98,6 +97,14 @@ mysqli_close($conn);
     <br>
     <a href="frgtpass.php" style="font-weight: 200; text-decoration:none; color:blue;">Forgot Password?</a>
     <br>   
+    <div class="error-message">
+                <?php
+                if (isset($errorMessage)) {
+                    echo $errorMessage;
+                }
+                ?>
+            </div>
+            <br>
     <a href="reg.php" style="font-weight: 200; text-decoration:none; color:blue;">Don't have an account? Register Here</a>
     <br>
 </form>
