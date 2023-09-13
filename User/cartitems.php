@@ -12,13 +12,11 @@ $user_id = $_SESSION['user_id'];
 $name = $_SESSION['name'];
 $email = $_SESSION['email'];
 
-// Retrieve the user's cart items
-$cart_id = $_SESSION['cart_id'];
-$sql = "SELECT ci.proid, p.name, p.price, ci.quan FROM cartitems ci
+$sql = "SELECT p.proimage, ci.proid, p.name, p.brand, p.price, ci.quan FROM cart ci
         JOIN product p ON ci.proid = p.proid
-        WHERE ci.cartid = ?";
+        WHERE ci.userid = ?";
 $stmt = mysqli_prepare($conn, $sql);
-$stmt->bind_param('s', $cart_id);
+$stmt->bind_param('s', $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -50,14 +48,19 @@ $result = $stmt->get_result();
         // Check if there are any items in the cart
         if ($result->num_rows > 0) {
             // Display cart items using a loop
+            $total=0;
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="cart-item">';
+                echo '<p> <img src="'.$row['proimage'].'"></p>';
+                echo '<h2>' . $row['brand'] . '</h2>';
                 echo '<h3>' . $row['name'] . '</h3>';
-                echo '<p>Price: $' . $row['price'] . '</p>';
+                echo '<p>Price: ₹' . $row['price'] . '</p>';
                 echo '<p>Quantity: ' . $row['quan'] . '</p>';
-                echo '<p>Total: $' . ($row['price'] * $row['quan']) . '</p>';
+                echo '<p>Total: ₹' . ($row['price'] * $row['quan']) . '</p>';
+                $total += ($row['price'] * $row['quan']);
                 // You can add a "Remove" button here to remove items from the cart
                 echo '</div>';
+                echo "<h1>Total Cart Price: ₹".$total."</h1>";
             }
         } else {
             echo 'Your cart is empty.';
