@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2023 at 02:54 PM
+-- Generation Time: Sep 14, 2023 at 08:04 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -52,22 +52,24 @@ INSERT INTO `adminreg` (`adid`, `adname`, `ademail`, `adphno`, `adpassword`) VAL
 --
 
 CREATE TABLE `cart` (
-  `cartid` varchar(255) NOT NULL,
-  `userid` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cartitems`
---
-
-CREATE TABLE `cartitems` (
-  `cartitemid` varchar(255) NOT NULL,
-  `cartid` varchar(255) NOT NULL,
+  `userid` varchar(255) NOT NULL,
   `proid` varchar(255) NOT NULL,
-  `quan` int(255) NOT NULL
+  `quan` int(10) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`userid`, `proid`, `quan`) VALUES
+('Subh576', 'phon579', 2),
+('Subh576', 'phon758', 1),
+('Subh576', 'smar203', 1),
+('Subh576', 'smar351', 1),
+('Subh576', 'smar612', 1),
+('Subh576', 'smar988', 1),
+('Subh601', 'phon579', 1),
+('Subh601', 'phon758', 1);
 
 -- --------------------------------------------------------
 
@@ -89,7 +91,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`proid`, `name`, `price`, `quan`, `brand`, `proimage`) VALUES
-('mobi612', 'mobile', 12345, 23, 'realme', '../uploadImage/3.png'),
+('mobi612', 'mobile', 12345, 0, 'realme', '../uploadImage/3.png'),
 ('phon579', 'phone', 12000, 23, 'xiome', '../uploadImage/1.png'),
 ('phon758', 'phone', 12389, 23, 'xiome', '../uploadImage/2.png'),
 ('smar203', 'smart phone', 456789, 12, 'apple', '../uploadImage/3.png'),
@@ -133,7 +135,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `name`, `email`, `phno`, `address`, `dob`, `password`, `propic`) VALUES
-('Subh576', 'Subhradip Das', 'subhradipdas6969@gmail.com', '9635760319', 'none', '2023-09-04', '12345', '');
+('Subh576', 'Subhradip Das', 'subhradipdas6969@gmail.com', '9635760319', 'none', '2023-09-04', '12345', ''),
+('Subh601', 'Subhra', 'mail@gmail.com', '123456789', 'none', '2023-09-13', '12345', '');
 
 --
 -- Indexes for dumped tables
@@ -151,17 +154,8 @@ ALTER TABLE `adminreg`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cartid`,`userid`),
-  ADD UNIQUE KEY `cartid` (`cartid`,`userid`),
-  ADD KEY `userid` (`userid`);
-
---
--- Indexes for table `cartitems`
---
-ALTER TABLE `cartitems`
-  ADD PRIMARY KEY (`cartitemid`),
-  ADD KEY `proid` (`proid`),
-  ADD KEY `cartid` (`cartid`);
+  ADD PRIMARY KEY (`userid`,`proid`),
+  ADD KEY `proid` (`proid`);
 
 --
 -- Indexes for table `product`
@@ -185,14 +179,8 @@ ALTER TABLE `users`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
-
---
--- Constraints for table `cartitems`
---
-ALTER TABLE `cartitems`
-  ADD CONSTRAINT `cartitems_ibfk_1` FOREIGN KEY (`proid`) REFERENCES `product` (`proid`),
-  ADD CONSTRAINT `cartitems_ibfk_2` FOREIGN KEY (`cartid`) REFERENCES `cart` (`cartid`);
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`proid`) REFERENCES `product` (`proid`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
