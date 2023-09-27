@@ -20,9 +20,6 @@ $result = mysqli_query($conn, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- ... rest of your HTML code ... -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +39,7 @@ $result = mysqli_query($conn, $sql);
                     <li><a href="../WSPage/contact.php">Contact</a></li>
                     <li><a href="../WSPage/about.php">About Us</a></li>
                     <li><a href="profile.php"><img src="">Profile</a></li>
-                    <li><a href="cartitems.php">Cart</a></li> <!-- Link to your shopping cart page -->
+                    <li><a href="cartitems.php">Cart</a></li>
                     <li><a href="logout.php">Log Out</a></li>
                 </ul>
             </nav>

@@ -108,7 +108,7 @@ if (isset($_POST['Submit'])) {
 			</div>
 			<!--Name-->
 
-			<!-- Add this input field for profile picture upload -->
+			<!-- Add this input field for profile picture upload
 			<div class="box">
 				<label for="profilePicture" class="fl fontLabel"> Profile Picture: </label>
 				<div class="fl iconBox"><i class="fa fa-image" aria-hidden="true"></i></div>
@@ -116,7 +116,7 @@ if (isset($_POST['Submit'])) {
 					<input type="file" name="profilePicture" accept="image/*">
 				</div>
 				<div class="clr"></div>
-			</div>
+			</div> -->
 			<!-- End of profile picture upload field -->
 
 

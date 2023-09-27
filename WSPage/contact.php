@@ -8,9 +8,7 @@ require("../_dbConnect.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Your Mobile Store</title>
-    <style>
-        /* Add your CSS styles here for page customization */
-    </style>
+    <link rel="stylesheet" href="contact.css">
 </head>
 <body>
     <header>
@@ -18,9 +16,12 @@ require("../_dbConnect.php");
         <!-- Example: -->
         <nav>
             <ul>
-                <li><a href="home.php">Home</a></li>
+                <li><a href="../User/home.php">Home</a></li>
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="../User/profile.php">Profile</a></li>
+                <li><a href="../User/cart.php">Cart</a></li>
+                <li><a href="../User/logout.php">Log Out</a></li>
             </ul>
         </nav>
     </header>
@@ -47,10 +48,8 @@ require("../_dbConnect.php");
     </section>
 
     <footer>
-        <!-- Include your website's footer here -->
-        <!-- Example: -->
         <div class="footer-content">
-            <p>&copy; <?php echo date("Y"); ?> Your Mobile Store</p>
+            <p>&copy; <?php echo date("Y") ?> Your Mobile Store</p>
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>

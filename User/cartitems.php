@@ -28,15 +28,18 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file here -->
+    <link rel="stylesheet" href="cartitems.css"> <!-- Add your CSS file here -->
 </head>
 <body>
     <header>
-        <h1>Your Shopping Cart</h1>
         <nav>
             <ul>
-                <li><a href="home.php">Home</a></li>
-                <li><a href="#">Contact</a></li>
+            <li><a href="home.php">Home</a></li>
+                <li><a href="../WSPage/contact.php">Contact</a></li>
+                <li><a href="../WSPage/about.php">About Us</a></li>
+                <li><a href="profile.php"><img src="">Profile</a></li>
+                <li><a href="cartitems.php">Cart</a></li>
+                <li><a href="logout.php">Log Out</a></li>
             </ul>
         </nav>
     </header>
@@ -60,8 +63,9 @@ $result = $stmt->get_result();
                 $total += ($row['price'] * $row['quan']);
                 // You can add a "Remove" button here to remove items from the cart
                 echo '</div>';
-                echo "<h1>Total Cart Price: ₹".$total."</h1>";
+                // echo "<h1>Total Cart Price: ₹".$total."</h1>";
             }
+            echo "<h1>Total Cart Price: ₹".$total."</h1>";
         } else {
             echo 'Your cart is empty.';
         }
