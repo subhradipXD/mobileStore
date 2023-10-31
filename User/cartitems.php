@@ -20,6 +20,48 @@ $stmt->bind_param('s', $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Handle quantity updates
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_quantity'])) {
+    $proid = $_POST['proid'];
+    $quantity = $_POST['quantity'];
+
+    if ($_POST['update_quantity'] === '+') {
+        // Increment quantity
+        $quantity++;
+    } elseif ($_POST['update_quantity'] === '-') {
+        // Decrement quantity (if not already 1)
+        if ($quantity > 1) {
+            $quantity--;
+        }
+    }
+
+    // Update the quantity in the database
+    $update_query = "UPDATE cart SET quan = ? WHERE userid = ? AND proid = ?";
+    $update_stmt = mysqli_prepare($conn, $update_query);
+    $update_stmt->bind_param('iss', $quantity, $user_id, $proid);
+
+    if ($update_stmt->execute()) {
+        // Quantity updated successfully
+        header("location: cartitems.php");
+        exit();
+    }
+}
+
+// Handle item deletion
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_item'])) {
+    $proid = $_POST['proid'];
+
+    // Delete the item from the cart
+    $delete_query = "DELETE FROM cart WHERE userid = ? AND proid = ?";
+    $delete_stmt = mysqli_prepare($conn, $delete_query);
+    $delete_stmt->bind_param('ss', $user_id, $proid);
+
+    if ($delete_stmt->execute()) {
+        // Item deleted successfully
+        header("location: cartitems.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +76,7 @@ $result = $stmt->get_result();
     <header>
         <nav>
             <ul>
-            <li><a href="home.php">Home</a></li>
+                <li><a href="home.php">Home</a></li>
                 <li><a href="../WSPage/contact.php">Contact</a></li>
                 <li><a href="../WSPage/about.php">About Us</a></li>
                 <li><a href="profile.php"><img src="">Profile</a></li>
@@ -51,26 +93,47 @@ $result = $stmt->get_result();
         // Check if there are any items in the cart
         if ($result->num_rows > 0) {
             // Display cart items using a loop
-            $total=0;
+            $total = 0;
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="cart-item">';
-                echo '<p> <img src="'.$row['proimage'].'"></p>';
+                echo '<p> <img src="' . $row['proimage'] . '"></p>';
                 echo '<h2>' . $row['brand'] . '</h2>';
                 echo '<h3>' . $row['name'] . '</h3>';
                 echo '<p>Price: ₹' . $row['price'] . '</p>';
-                echo '<p>Quantity: ' . $row['quan'] . '</p>';
+                echo '<form method="post">';
+                echo '<p>Quantity: <span id="quantity_' . $row['proid'] . '">' . $row['quan'] . '</span> ';
+
+                // Plus button (+)
+                echo '<button type="submit" name="update_quantity" value="+" class="cart-button">+</button> ';
+
+                // Minus button (-)
+                echo '<button type="submit" name="update_quantity" value="-" class="cart-button">-</button> ';
+
+                // Delete button
+                echo '<button type="submit" name="delete_item" class="cart-button">Remove</button></p>';
+                
+                // Hidden inputs to pass data
+                echo '<input type="hidden" name="proid" value="' . $row['proid'] . '">';
+                echo '<input type="hidden" name="quantity" value="' . $row['quan'] . '">';
+                echo '</form>';
+
                 echo '<p>Total: ₹' . ($row['price'] * $row['quan']) . '</p>';
                 $total += ($row['price'] * $row['quan']);
-                // You can add a "Remove" button here to remove items from the cart
                 echo '</div>';
-                // echo "<h1>Total Cart Price: ₹".$total."</h1>";
             }
-            echo "<h1>Total Cart Price: ₹".$total."</h1>";
+            echo "<h1>Total Cart Price: ₹" . $total . "</h1>";
         } else {
             echo 'Your cart is empty.';
         }
         ?>
     </section>
+    
+    <!-- Add the "Buy Now" button here -->
+    <form action="payment.php" method="post">
+    <input type="hidden" name="total_price" value="<?php echo $total; ?>">
+    <button type="submit" name="buy_now">Buy Now</button>
+</form>
+
 
     <footer>
         <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>

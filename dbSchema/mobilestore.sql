@@ -1,3 +1,5 @@
+CREATE DATABASE if not exists mobilestore;
+use mobilestore;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
