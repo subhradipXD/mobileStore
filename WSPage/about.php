@@ -21,7 +21,7 @@ require("../_dbConnect.php");
                 <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
                 <li><a href="../User/profile.php">Profile</a></li>
-                <li><a href="../User/cart.php">Cart</a></li>
+                <li><a href="../User/cartitems.php">Cart</a></li>
                 <li><a href="../User/logout.php">Log Out</a></li>
             </ul>
         </nav>

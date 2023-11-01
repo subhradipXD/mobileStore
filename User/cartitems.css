@@ -31,6 +31,9 @@ header nav ul li a {
     text-decoration: none;
     font-weight: bold;
 }
+header nav ul li a:hover {
+    color: #007bff;
+  }
 
 section.cart-items {
     max-width: 800px;
@@ -71,8 +74,34 @@ div.cart-item p {
     margin: 5px 0;
 }
 
+/* "Buy Now" button styles */
+form button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Message for empty cart styles */
+.empty-cart-message {
+    text-align: center;
+    color: #777;
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+
 footer {
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     text-align: center;
     padding: 10px 0;

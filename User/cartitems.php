@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_item'])) {
         <nav>
             <ul>
                 <li><a href="home.php">Home</a></li>
-                <li><a href="../WSPage/contact.php">Contact</a></li>
+                <li><a href="../WSPage/contact.php">Contact Us</a></li>
                 <li><a href="../WSPage/about.php">About Us</a></li>
                 <li><a href="profile.php"><img src="">Profile</a></li>
                 <li><a href="cartitems.php">Cart</a></li>
@@ -122,19 +122,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_item'])) {
                 echo '</div>';
             }
             echo "<h1>Total Cart Price: ₹" . $total . "</h1>";
+            if ($result->num_rows > 0) {
+                // Display the "Buy Now" button if the cart is not empty
+                echo '<form action="payment.php" method="post">';
+                echo '<input type="hidden" name="total_price" value="' . $total . '">';
+                echo '<button type="submit" name="buy_now" class="buy-now-button">Buy Now</button>';
+                echo '</form>';
+            } else {
+                // Display a message if the cart is empty
+                echo '<p class="empty-cart-message">Your cart is empty. You cannot proceed to payment.</p>';
+            }
         } else {
             echo 'Your cart is empty.';
         }
         ?>
     </section>
     
-    <!-- Add the "Buy Now" button here -->
-    <form action="payment.php" method="post">
-    <input type="hidden" name="total_price" value="<?php echo $total; ?>">
-    <button type="submit" name="buy_now">Buy Now</button>
-</form>
-
-
     <footer>
         <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>
     </footer>

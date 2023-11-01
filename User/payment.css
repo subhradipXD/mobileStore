@@ -1,0 +1,77 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set a background color and text color for the entire page */
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Style the header/navigation bar */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Style the payment options section */
+.payment-options {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-options h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.payment-options label {
+    font-weight: bold;
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+.payment-options button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payment-options button:hover {
+    background-color: #555;
+}
+
+/* Style the footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}

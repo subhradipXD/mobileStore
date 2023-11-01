@@ -16,5 +16,5 @@ session_unset();
 session_destroy();
 
 // Redirect the user to the login page after logging out
-header("location: ../WSPage/index.php");
+header("location: home.php");
 exit();

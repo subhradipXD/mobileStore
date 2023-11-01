@@ -23,7 +23,7 @@
   
   /* Navigation bar styles */
   nav {
-    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
+    background-color: rgb(0, 0, 0); /* Add a semi-transparent black background */
     padding: 10px 0;
   }
   
@@ -82,3 +82,101 @@
     color: #fff;
   }
   
+  /* Update User Information and Password Update section styles */
+.update-user {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.update-user h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.update-user label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.update-user input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.update-user button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-user button:hover {
+  background-color: #0056b3;
+}
+
+/* Password Update message */
+.update-message {
+  margin-top: 20px;
+  color: green; /* You can choose your desired color for success messages */
+  font-weight: bold;
+}
+
+.update-message.error {
+  color: red; /* You can choose your desired color for error messages */
+}
+
+/* Account Delete section styles */
+.account-delete {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.account-delete h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.account-delete p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: red;
+}
+
+.account-delete label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.account-delete input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.account-delete button {
+  background-color: red;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-delete button:hover {
+  background-color: #b30000;
+}

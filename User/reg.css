@@ -68,12 +68,6 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #007bff; /* Change color on hover */
-  text-decoration: underline;
-}
-
-nav ul li a:hover {
-  color: #007bff; /* Change color on hover */
-  text-decoration: underline;
 }
 
 /* Form styles */

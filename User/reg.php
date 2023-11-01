@@ -16,22 +16,6 @@ if (isset($_POST['Submit'])) {
 	$password = $_POST["password"];
 	$confirmPassword = $_POST["confirmPassword"]; // Added field for confirm password
 
-	// Handle profile picture upload
-	// $profilePicture = ""; // Initialize with a default blank image
-
-	// if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK) {
-	//     $uploadDir = "profile_pictures/"; // Directory to store uploaded profile pictures
-	//     $uploadedFile = $_FILES['profilePicture']['tmp_name'];
-	//     $fileExtension = pathinfo($_FILES['profilePicture']['name'], PATHINFO_EXTENSION);
-	//     $profilePicture = $userID . "." . $fileExtension; // Unique file name based on user ID
-
-	//     // Move the uploaded file to the desired directory
-	//     if (move_uploaded_file($uploadedFile, $uploadDir . $profilePicture)) {
-	//         // File uploaded successfully, now you can store $profilePicture in the database
-	//     } else {
-	//         $errorMsg = "Error uploading profile picture.";
-	//     }
-	// }
 
 	if ($password !== $confirmPassword) {
 		$errorMsg = "Passwords do not match.";
@@ -79,7 +63,7 @@ if (isset($_POST['Submit'])) {
 	<header id="head">
 		<nav>
 			<ul>
-				<li><a href="../WSPage/index.php">Home</a></li>
+				<li><a href="home.php">Home</a></li>
 				<li><a href="../WSPage/contact.php">Contact</a></li>
 				<li><a href="../WSPage/about.php">About Us</a></li>
 			</ul>

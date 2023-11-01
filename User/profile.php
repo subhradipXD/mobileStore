@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_user'])) {
     $new_user_id .= $last_4_numbers;
 
     // Query to update user information and user ID
-    $update_query = "UPDATE users SET name = '$new_name', email = '$new_email', userid = '$new_user_id' WHERE userid = '$user_id";
+    $update_query = "UPDATE users SET name = '$new_name', email = '$new_email', userid = '$new_user_id' WHERE userid = '$user_id'";
+
 
     if (mysqli_query($conn, $update_query)) {
         // User information and user ID updated successfully
@@ -53,6 +54,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_user'])) {
         echo "User information update failed: " . mysqli_error($conn);
     }
 }
+
+// Update Password
+$password_update_message = ""; // Initialize an empty message
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
+    $old_password = $_POST['old_password'];
+    $new_password = $_POST['new_password'];
+
+    if ($old_password == $new_password) {
+        // If old and new passwords are the same, display a message
+        $password_update_message = "Old and new passwords are the same. No changes made.";
+    } else {
+        // Verify the old password before updating
+        $check_password_query = "SELECT password FROM users WHERE userid = '$user_id'";
+        $result = mysqli_query($conn, $check_password_query);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $stored_password = $row['password'];
+
+            // Verify the old password
+            if ($old_password == $stored_password) {
+                // Old password matches, update the password
+                $update_password_query = "UPDATE users SET password = '$new_password' WHERE userid = '$user_id'";
+
+                if (mysqli_query($conn, $update_password_query)) {
+                    // Password updated successfully
+                    $password_update_message = "Password updated successfully."; // Set the success message
+                } else {
+                    // Handle the database update error
+                    $password_update_message = "Password update failed: " . mysqli_error($conn);
+                }
+            } else {
+                // Old password doesn't match
+                $password_update_message = "Old password is incorrect. Please try again.";
+            }
+        } else {
+            // Handle the database query error
+            $password_update_message = "Error checking old password: " . mysqli_error($conn);
+        }
+    }
+}
+
+
 
 // Delete Account
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
@@ -104,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
         <nav>
             <ul>
                 <li><a href="home.php">Home</a></li>
-                <li><a href="../WSPage/contact.php">Contact</a></li>
+                <li><a href="../WSPage/contact.php">Contact Us</a></li>
                 <li><a href="../WSPage/about.php">About Us</a></li>
                 <li><a href="profile.php"><img src="">Profile</a></li>
                 <li><a href="cartitems.php">Cart</a></li>
@@ -124,17 +169,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
     </section>
 
     <section class="update-user">
-        <h2>Update User Information</h2>
-        <form action="" method="post">
-            <label for="new_name">New Name:</label>
-            <input type="text" name="new_name" value="<?php echo $name; ?>" required>
+    <h2>Update User Information</h2>
+    <form action="" method="post">
+        <label for="new_name">New Name:</label>
+        <input type="text" name="new_name" value="<?php echo $name; ?>" required>
 
-            <label for="new_email">New Email:</label>
-            <input type="email" name="new_email" value="<?php echo $email; ?>" required>
+        <label for="new_email">New Email:</label>
+        <input type="email" name="new_email" value="<?php echo $email; ?>" required>
 
-            <button type="submit" name="update_user">Update User Info</button>
-        </form>
-    </section>
+        <label for="old_password">Old Password:</label>
+        <input type="password" name="old_password" required>
+
+        <label for="new_password">New Password:</label>
+        <input type="password" name="new_password" required>
+
+        <button type="submit" name="update_user">Update User Info</button>
+        <button type="submit" name="update_password">Update Password</button>
+    </form>
+    <!-- Display the password update message -->
+    <div class="update-message"><?php echo $password_update_message; ?></div>
+</section>
+
+
 
     <section class="account-delete">
         <h2>Delete Account</h2>

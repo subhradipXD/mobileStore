@@ -31,12 +31,16 @@ header nav ul li a {
     font-weight: bold;
 }
 
+header nav ul li a:hover {
+    color: #007bff;
+  }
+
 section {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
 section h1 {
@@ -55,7 +59,7 @@ section p {
 }
 
 footer {
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     text-align: center;
     padding: 10px 0;
@@ -69,18 +73,4 @@ footer a {
     color: #fff;
     text-decoration: none;
     margin: 0 10px;
-}
-
-
-/* Add media queries for responsiveness */
-@media (max-width: 768px) {
-    header nav ul {
-        text-align: left;
-        padding: 10px;
-    }
-
-    header nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
 }

@@ -79,7 +79,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         } else {
             echo "Bank Transfer payment failed. Cart items were not cleared.";
         }
-    } else {
+    } elseif ($payment_method === "cash_on_delivery") {
+        // Process bank transfer payment
+        // Add your bank transfer payment processing code here
+
+        // Check if payment is successful
+        $cash_on_delivery_payment_successful = true; // Replace with your actual payment check
+
+        if ($cash_on_delivery_payment_successful) {
+            echo "cash on delivery payment successful! Total Cart Price: ₹" . $total_price;
+
+            // Clear the cart items for the user
+            $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
+            $clear_cart_stmt = mysqli_prepare($conn, $clear_cart_query);
+            $clear_cart_stmt->bind_param('s', $user_id);
+
+            if ($clear_cart_stmt->execute()) {
+                echo "Cart items have been cleared.";
+            } else {
+                echo "Error clearing cart items.";
+            }
+        } else {
+            echo "cash on delivery payment failed. Cart items were not cleared.";
+        }
+    }elseif ($payment_method === "google_pay") {
+        // Process bank transfer payment
+        // Add your bank transfer payment processing code here
+
+        // Check if payment is successful
+        $google_pay_payment_successful = true; // Replace with your actual payment check
+
+        if ($google_pay_payment_successful) {
+            echo "google pay payment successful! Total Cart Price: ₹" . $total_price;
+
+            // Clear the cart items for the user
+            $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
+            $clear_cart_stmt = mysqli_prepare($conn, $clear_cart_query);
+            $clear_cart_stmt->bind_param('s', $user_id);
+
+            if ($clear_cart_stmt->execute()) {
+                echo "Cart items have been cleared.";
+            } else {
+                echo "Error clearing cart items.";
+            }
+        } else {
+            echo "google pay payment failed. Cart items were not cleared.";
+        }
+    }elseif ($payment_method === "apple_pay") {
+        // Process bank transfer payment
+        // Add your bank transfer payment processing code here
+
+        // Check if payment is successful
+        $apple_pay_payment_successful = true; // Replace with your actual payment check
+
+        if ($apple_pay_payment_successful) {
+            echo "apple pay payment successful! Total Cart Price: ₹" . $total_price;
+
+            // Clear the cart items for the user
+            $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
+            $clear_cart_stmt = mysqli_prepare($conn, $clear_cart_query);
+            $clear_cart_stmt->bind_param('s', $user_id);
+
+            if ($clear_cart_stmt->execute()) {
+                echo "Cart items have been cleared.";
+            } else {
+                echo "Error clearing cart items.";
+            }
+        } else {
+            echo "apple pay payment failed. Cart items were not cleared.";
+        }
+    }else {
         echo "Invalid payment method selected. Total Cart Price: ₹" . $total_price;
     }
     
