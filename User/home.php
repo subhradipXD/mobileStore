@@ -168,14 +168,26 @@ $result = mysqli_query($conn, $sql);
     <div class="slideshow-container">
 
         <div class="mySlides fade">
-            <div class="numbertext">1 / 2</div>
+            <div class="numbertext">1 / 4</div>
             <img src="..\Admin\productImages\banner\Banner1.png" style="width:100%">
             <div class="text"><b>Buy Now</b></div>
         </div>
 
         <div class="mySlides fade">
-            <div class="numbertext">2 / 2</div>
+            <div class="numbertext">2 / 4</div>
+            <img src="..\Admin\productImages\banner\banner1-cr-500x150.jpg" style="width:100%">
+            <div class="text"><b>Buy Now</b></div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 4</div>
             <img src="..\Admin\productImages\banner\Banner2.png" style="width:100%">
+            <div class="text"><b>Buy Now</b></div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">4 / 4</div>
+            <img src="..\Admin\productImages\banner\banner2-cr-500x150.jpg" style="width:100%">
             <div class="text"><b>Buy Now</b></div>
         </div>
 
@@ -188,6 +200,8 @@ $result = mysqli_query($conn, $sql);
     <div style="text-align:center">
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
     </div>
 
     <script>
