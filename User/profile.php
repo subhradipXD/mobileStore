@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
 
         if (mysqli_query($conn, $delete_query)) {
             session_destroy(); // Destroy the user's session
-            header("location: ../WSPage/index.php"); // Redirect to a confirmation page
+            header("location: login.php"); // Redirect to a confirmation page
             exit();
         } else {
             // Handle the database deletion error
