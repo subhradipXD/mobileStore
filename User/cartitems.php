@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_item'])) {
             echo "<h1>Total Cart Price: ₹" . $total . "</h1>";
             if ($result->num_rows > 0) {
                 // Display the "Buy Now" button if the cart is not empty
-                echo '<form action="payment.php" method="post">';
+                echo '<form action="payment.php" method="get">';
                 echo '<input type="hidden" name="total_price" value="' . $total . '">';
                 echo '<button type="submit" name="buy_now" class="buy-now-button">Buy Now</button>';
                 echo '</form>';

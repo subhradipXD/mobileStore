@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
     $payment_method = $_POST["payment_method"];
     
     // Retrieve the total cart price from the hidden input
-    $total_price = isset($_POST["total_price"]) ? floatval($_POST["total_price"]) : 0;
+    // $total_price = isset($_POST["total_price"]) ? floatval($_POST["total_price"]) : 0;
 
     // Initialize user_id (You may retrieve it from the session as in your original code)
     $user_id = $_SESSION['user_id'];
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         $credit_card_payment_successful = true; // Replace with your actual payment check
 
         if ($credit_card_payment_successful) {
-            echo "Credit Card payment successful! Total Cart Price: ₹" . $total_price;
+            echo "Credit Card payment successful!";
 
             // Clear the cart items for the user
             $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         $paypal_payment_successful = true; // Replace with your actual payment check
 
         if ($paypal_payment_successful) {
-            echo "PayPal payment successful! Total Cart Price: ₹" . $total_price;
+            echo "PayPal payment successful!";
 
             // Clear the cart items for the user
             $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         $bank_transfer_payment_successful = true; // Replace with your actual payment check
 
         if ($bank_transfer_payment_successful) {
-            echo "Bank Transfer payment successful! Total Cart Price: ₹" . $total_price;
+            echo "Bank Transfer payment successful!";
 
             // Clear the cart items for the user
             $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         $cash_on_delivery_payment_successful = true; // Replace with your actual payment check
 
         if ($cash_on_delivery_payment_successful) {
-            echo "cash on delivery payment successful! Total Cart Price: ₹" . $total_price;
+            echo "cash on delivery payment successful!";
 
             // Clear the cart items for the user
             $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         $google_pay_payment_successful = true; // Replace with your actual payment check
 
         if ($google_pay_payment_successful) {
-            echo "google pay payment successful! Total Cart Price: ₹" . $total_price;
+            echo "google pay payment successful!";
 
             // Clear the cart items for the user
             $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
         $apple_pay_payment_successful = true; // Replace with your actual payment check
 
         if ($apple_pay_payment_successful) {
-            echo "apple pay payment successful! Total Cart Price: ₹" . $total_price;
+            echo "apple pay payment successful!";
 
             // Clear the cart items for the user
             $clear_cart_query = "DELETE FROM cart WHERE userid = ?";
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             echo "apple pay payment failed. Cart items were not cleared.";
         }
     }else {
-        echo "Invalid payment method selected. Total Cart Price: ₹" . $total_price;
+        echo "Invalid payment method selected.";
     }
     
     // Redirect to the home page after a brief delay (e.g., 2 seconds)
