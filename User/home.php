@@ -12,17 +12,37 @@ $user_id = $_SESSION['user_id'];
 $name = $_SESSION['name'];
 $email = $_SESSION['email'];
 
-// Query to fetch products from the database
-$sql = "SELECT * FROM product";
-$result = mysqli_query($conn, $sql);
+// Check if a product is being added to the cart
+if (isset($_GET['product_id'])) {
+    $prod_id = $_GET['product_id'];
 
+    // Check if the product is already in the cart
+    $cartQuery = "SELECT quan FROM cart WHERE userid = '$user_id' AND proid = '$prod_id'";
+    $result = mysqli_query($conn, $cartQuery);
+
+    if (mysqli_num_rows($result) > 0) {
+        // If the product is in the cart, increase its quantity
+        $row = mysqli_fetch_assoc($result);
+        $quan = $row['quan'] + 1;
+        $updateQ = "UPDATE cart SET quan = '$quan' WHERE userid = '$user_id' AND proid = '$prod_id'";
+    } else {
+        // If the product is not in the cart, add it
+        $updateQ = "INSERT INTO cart (userid, proid) VALUES ('$user_id', '$prod_id')";
+    }
+
+    if (mysqli_query($conn, $updateQ)) {
+        // Product added to the cart successfully
+        echo "Product added to the cart";
+        exit();
+    } else {
+        echo 'Error adding the product to the cart';
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,9 +165,7 @@ $result = mysqli_query($conn, $sql);
             }
         }
     </style>
-
 </head>
-
 <body>
     <header>
         <div id="navbar">
@@ -165,119 +183,48 @@ $result = mysqli_query($conn, $sql);
         <img src="logo\1.png" alt="Logo" class="image">
         <h1>Welcome to Mobile Book</h1>
     </header>
+
     <div class="slideshow-container">
-
-        <div class="mySlides fade">
-            <div class="numbertext">1 / 4</div>
-            <img src="..\Admin\productImages\banner\Banner1.png" style="width:100%">
-            <div class="text"><b>Buy Now</b></div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">2 / 4</div>
-            <img src="..\Admin\productImages\banner\banner1-cr-500x150.jpg" style="width:100%">
-            <div class="text"><b>Buy Now</b></div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">3 / 4</div>
-            <img src="..\Admin\productImages\banner\Banner2.png" style="width:100%">
-            <div class="text"><b>Buy Now</b></div>
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">4 / 4</div>
-            <img src="..\Admin\productImages\banner\banner2-cr-500x150.jpg" style="width:100%">
-            <div class="text"><b>Buy Now</b></div>
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">❮</a>
-        <a class="next" onclick="plusSlides(1)">❯</a>
-
+        <!-- Your slideshow content goes here -->
     </div>
     <br>
 
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
-    </div>
-
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {
-                slideIndex = 1
-            }
-            if (n < 1) {
-                slideIndex = slides.length
-            }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-        }
-    </script>
-
     <h2 id="fp">Featured Products</h2>
     <section class="featured-products">
-
         <?php
-        // Check if there are any products in the database
-        if (mysqli_num_rows($result) > 0) {
-            // Output each product's details using a loop
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<div class="product">';
-                echo '<img src="' . $row['proimage'] . '" alt="' . $row['name'] . '">';
-                echo '<h3>' . $row['name'] . '</h3>';
-                echo '<p>Brand: ' . $row['brand'] . '</p>';
+        // Query to fetch products from the database
+        $sql = "SELECT * FROM product";
+        $result = mysqli_query($conn, $sql);
 
-                if ($row['quan'] > 0) {
-                    // Product is in stock, display price and add to cart button
-                    echo '<p>Price: ₹' . $row['price'] . '</p>';
-                    $pid = $row['proid'];
-                    $quary = "select * from cart where userid = '$user_id' and proid = '$pid'";
-                    $res = mysqli_query($conn, $quary);
-                    if (mysqli_num_rows($res) == 0) {
-                        echo '<form action="cart.php" method="get">';
-                        echo '<input type="hidden" name="product_id" value="' . $row['proid'] . '">';
-                        echo '<button type="submit">Add to Cart</button>';
-                        echo '</form>';
-                    } else {
-                        echo "<p style='color:red;'>Added</p>";
-                    }
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class="product">';
+            echo '<img src="' . $row['proimage'] . '" alt="' . $row['name'] . '">';
+            echo '<h3>' . $row['name'] . '</h3>';
+            echo '<p>Brand: ' . $row['brand'] . '</p>';
+
+            if ($row['quan'] > 0) {
+                // Product is in stock, display price and add to cart button
+                echo '<p>Price: ₹' . $row['price'] . '</p>';
+                $pid = $row['proid'];
+                $quary = "select * from cart where userid = '$user_id' and proid = '$pid'";
+                $res = mysqli_query($conn, $quary);
+                if (mysqli_num_rows($res) == 0) {
+                    echo '<button class="add-to-cart" data-product-id="' . $row['proid'] . '">Add to Cart</button>';
                 } else {
-                    // Product is out of stock
-                    echo '<p>Out of Stock</p>';
+                    echo "<p style='color:red;'>Added</p>";
                 }
-
-                echo '</div>';
+            } else {
+                // Product is out of stock
+                echo '<p>Out of Stock</p>';
             }
-        } else {
-            echo 'No products found.';
+
+            echo '</div>';
         }
         ?>
     </section>
 
     <section class="about-us">
+        <!-- Your "About Us" section content -->
         <a href="../WSPage/about.php">
             <h2>About Us</h2>
         </a>
@@ -288,7 +235,24 @@ $result = mysqli_query($conn, $sql);
         <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>
     </footer>
 
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Add product to cart using AJAX
+            $('.add-to-cart').on('click', function () {
+                var productId = $(this).data('product-id');
+                $.ajax({
+                    type: "GET",
+                    url: "home.php", // Replace with the URL of this page
+                    data: {
+                        product_id: productId
+                    },
+                    success: function (response) {
+                        // alert(response); // Display a message to the user
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
