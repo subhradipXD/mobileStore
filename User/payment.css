@@ -8,14 +8,14 @@
 /* Set a background color and text color for the entire page */
 body {
     background-color: #f0f0f0;
-    color: #333;
+    color: #000000;
     font-family: Arial, sans-serif;
     text-align: center;
 }
 
 /* Style the header/navigation bar */
 header {
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     padding: 10px 0;
 }
@@ -40,7 +40,7 @@ nav a {
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(35, 132, 250);
 }
 
 .payment-options h3 {
@@ -57,7 +57,7 @@ nav a {
 }
 
 .payment-options button {
-    background-color: #333;
+    background-color: rgb(53, 95, 222);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -66,12 +66,12 @@ nav a {
 }
 
 .payment-options button:hover {
-    background-color: #555;
+    background-color: rgb(25, 59, 211);
 }
 
 /* Style the footer */
 footer {
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     padding: 10px 0;
 }

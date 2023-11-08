@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_item'])) {
     </section>
     
     <footer>
-        <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>
+        <p>&copy; <?php echo date("Y"); ?> Mobile Book</p>
     </footer>
 </body>
 </html>

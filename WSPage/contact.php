@@ -33,12 +33,12 @@ require("../_dbConnect.php");
         
         <div>
             <h2>Email</h2>
-            <p>Email: <a href="mailto:contact@yourmobilestore.com">contact@yourmobilestore.com</a></p>
+            <p>Email: <a href="mailto:subhradipdas6969@gmail.com">contact@MobileBook.com</a></p>
         </div>
 
         <div>
             <h2>Phone</h2>
-            <p>Customer Support: +1 (123) 456-7890</p>
+            <p>Customer Support: +91 9635760319</p>
         </div>
 
         <div>
@@ -49,7 +49,7 @@ require("../_dbConnect.php");
 
     <footer>
         <div class="footer-content">
-            <p>&copy; <?php echo date("Y") ?> Your Mobile Store</p>
+            <p>&copy; <?php echo date("Y") ?> Mobile Book</p>
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>

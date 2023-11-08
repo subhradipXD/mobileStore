@@ -29,17 +29,17 @@ require("../_dbConnect.php");
 
     <section>
         <h1>About Us</h1>
-        <p>Welcome to Your Mobile Store, your one-stop destination for the latest and greatest mobile devices. We are dedicated to providing you with the best mobile shopping experience.</p>
+        <p>Welcome to Mobile Book, your one-stop destination for the latest and greatest mobile devices. We are dedicated to providing you with the best mobile shopping experience.</p>
         <p>Our mission is to offer a wide selection of high-quality mobile phones and accessories at competitive prices. We understand the importance of staying connected in today's fast-paced world, and we strive to make the latest technology accessible to everyone.</p>
-        <p>At Your Mobile Store, we believe in customer satisfaction above all else. Our team of experts is here to assist you in finding the perfect mobile device that suits your needs. Whether you're looking for a flagship smartphone, a budget-friendly option, or accessories to enhance your mobile experience, we've got you covered.</p>
-        <p>Thank you for choosing Your Mobile Store for all your mobile shopping needs. We look forward to serving you and helping you stay connected with the world.</p>
+        <p>At Mobile Book, we believe in customer satisfaction above all else. Our team of experts is here to assist you in finding the perfect mobile device that suits your needs. Whether you're looking for a flagship smartphone, a budget-friendly option, or accessories to enhance your mobile experience, we've got you covered.</p>
+        <p>Thank you for choosing Mobile Book for all your mobile shopping needs. We look forward to serving you and helping you stay connected with the world.</p>
     </section>
 
     <footer>
         <!-- Include your website's footer here -->
         <!-- Example: -->
         <div class="footer-content">
-            <p>&copy; <?php echo date("Y"); ?> Your Mobile Store</p>
+            <p>&copy; <?php echo date("Y"); ?> Mobile Book</p>
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>

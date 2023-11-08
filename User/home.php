@@ -303,7 +303,7 @@ if (isset($_GET['product_id'])) {
     </section>
 
     <footer>
-        <p>&copy; <?php echo date("Y"); ?> Mobile Store</p>
+        <p>&copy; <?php echo date("Y"); ?> Mobile Book</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
