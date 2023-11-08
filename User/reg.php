@@ -55,8 +55,63 @@ if (isset($_POST['Submit'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>UserRegistration</title>
 	<link rel="stylesheet" type="text/css" href="reg.css">
+	<script>
+		function validateForm() {
+			var name = document.forms["registrationForm"]["Name"].value;
+			var phoneNo = document.forms["registrationForm"]["phoneNo"].value;
+			var email = document.forms["registrationForm"]["email"].value;
+			var address = document.forms["registrationForm"]["address"].value;
+			var dob = document.forms["registrationForm"]["DOB"].value;
+			var password = document.forms["registrationForm"]["password"].value;
+			var confirmPassword = document.forms["registrationForm"]["confirmPassword"].value;
 
+			if (name == "") {
+				alert("Name must be filled out");
+				return false;
+			}
+
+			if (phoneNo == "" || isNaN(phoneNo) || phoneNo.length != 10) {
+				alert("Please enter a valid 10-digit phone number");
+				return false;
+			}
+
+			// Email validation using regular expression
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailRegex.test(email)) {
+				alert("Please enter a valid email address");
+				return false;
+			}
+
+			// Additional email validation (optional)
+			if (email.length > 50) {
+				alert("Email address is too long");
+				return false;
+			}
+
+			// Add address validation if needed
+
+			if (dob == "") {
+				alert("Date of Birth must be filled out");
+				return false;
+			}
+
+			// Password validation
+			var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+			if (!passwordRegex.test(password)) {
+				alert("Password must be at least 6 characters long and include at least one lowercase letter, one uppercase letter, and one digit");
+				return false;
+			}
+
+			if (password !== confirmPassword) {
+				alert("Passwords do not match");
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 </head>
+
 
 <body>
 
@@ -78,7 +133,7 @@ if (isset($_POST['Submit'])) {
 		<?php if (!empty($errorMsg)) : ?>
 			<p><?php echo $errorMsg; ?></p>
 		<?php endif; ?>
-		<form method="post" autocomplete="on">
+		<form method="post" autocomplete="on" name="registrationForm" onsubmit="return validateForm()">
 			<!--Name-->
 			<div class="box">
 				<label for="Name" class="fl fontLabel"> Name: </label>
@@ -92,18 +147,6 @@ if (isset($_POST['Submit'])) {
 			</div>
 			<!--Name-->
 
-			<!-- Add this input field for profile picture upload
-			<div class="box">
-				<label for="profilePicture" class="fl fontLabel"> Profile Picture: </label>
-				<div class="fl iconBox"><i class="fa fa-image" aria-hidden="true"></i></div>
-				<div class="fr">
-					<input type="file" name="profilePicture" accept="image/*">
-				</div>
-				<div class="clr"></div>
-			</div> -->
-			<!-- End of profile picture upload field -->
-
-
 			<!--- Phone No.---->
 			<div class="box">
 				<label for="phone" class="fl fontLabel"> Phone No.: </label>
@@ -114,7 +157,6 @@ if (isset($_POST['Submit'])) {
 				<div class="clr"></div>
 			</div>
 			<!---Phone No.---->
-
 
 			<!---Email ID---->
 			<div class="box">
@@ -185,8 +227,8 @@ if (isset($_POST['Submit'])) {
 	<!--Body of Form ends--->
 
 	<footer>
-    &copy; <?php echo date("Y"); ?> Your Website. All rights reserved.
-</footer>
+		&copy; <?php echo date("Y"); ?> Your Website. All rights reserved.
+	</footer>
 </body>
 
 </html>

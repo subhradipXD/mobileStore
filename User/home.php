@@ -43,6 +43,7 @@ if (isset($_GET['product_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,6 +167,7 @@ if (isset($_GET['product_id'])) {
         }
     </style>
 </head>
+
 <body>
     <header>
         <div id="navbar">
@@ -185,8 +187,77 @@ if (isset($_GET['product_id'])) {
     </header>
 
     <div class="slideshow-container">
-        <!-- Your slideshow content goes here -->
+
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 4</div>
+            <img src="..\Admin\productImages\banner\Banner1.png" style="width:100%">
+            <div class="text"><b>Buy Now</b></div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 4</div>
+            <img src="..\Admin\productImages\banner\banner1-cr-500x150.jpg" style="width:100%">
+            <div class="text"><b>Buy Now</b></div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 4</div>
+            <img src="..\Admin\productImages\banner\Banner2.png" style="width:100%">
+            <div class="text"><b>Buy Now</b></div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">4 / 4</div>
+            <img src="..\Admin\productImages\banner\banner2-cr-500x150.jpg" style="width:100%">
+            <div class="text"><b>Buy Now</b></div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
     </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+
     <br>
 
     <h2 id="fp">Featured Products</h2>
@@ -237,9 +308,9 @@ if (isset($_GET['product_id'])) {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Add product to cart using AJAX
-            $('.add-to-cart').on('click', function () {
+            $('.add-to-cart').on('click', function() {
                 var productId = $(this).data('product-id');
                 $.ajax({
                     type: "GET",
@@ -247,7 +318,7 @@ if (isset($_GET['product_id'])) {
                     data: {
                         product_id: productId
                     },
-                    success: function (response) {
+                    success: function(response) {
                         // alert(response); // Display a message to the user
                     }
                 });
@@ -255,4 +326,5 @@ if (isset($_GET['product_id'])) {
         });
     </script>
 </body>
+
 </html>

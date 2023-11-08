@@ -82,10 +82,26 @@ mysqli_close($conn);
         }
     </style>
     <link rel="stylesheet" type="text/css" href="logins.css">
-    
+
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    </script>
+    <script>
+        function validateLoginForm() {
+            var emailOrId = document.forms["loginForm"]["email_or_id"].value;
+            var password = document.forms["loginForm"]["password"].value;
+
+            if (emailOrId.trim() === "") {
+                alert("Please enter your email or ID");
+                return false;
+            }
+
+            if (password.trim() === "") {
+                alert("Please enter your password");
+                return false;
+            }
+
+            return true;
+        }
     </script>
 
 </head>
@@ -103,7 +119,7 @@ mysqli_close($conn);
 
     <h1>Please Login Here</h1>
 
-    <form action="login.php" method="post">
+    <form action="login.php" method="post" onsubmit="return validateLoginForm()" name="loginForm">
         <br>
         <label for="email_or_id">Enter Email or ID</label>
         <input type="text" placeholder="Email or ID" name="email_or_id" required>
