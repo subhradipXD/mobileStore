@@ -18,8 +18,8 @@ require("../_dbConnect.php");
         <nav>
             <ul>
                 <li><a href="../User/home.php">Home</a></li>
-                <li><a href="about.php">About Us</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="about.php">About Us</a></li>
                 <li><a href="../User/profile.php">Profile</a></li>
                 <li><a href="../User/cartitems.php">Cart</a></li>
                 <li><a href="../User/logout.php">Log Out</a></li>

@@ -4,10 +4,6 @@ include("../_dbConnect.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
     $payment_method = $_POST["payment_method"];
     
-    // Retrieve the total cart price from the hidden input
-    // $total_price = isset($_POST["total_price"]) ? floatval($_POST["total_price"]) : 0;
-
-    // Initialize user_id (You may retrieve it from the session as in your original code)
     $user_id = $_SESSION['user_id'];
 
     if ($payment_method === "credit_card") {
@@ -26,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             $clear_cart_stmt->bind_param('s', $user_id);
 
             if ($clear_cart_stmt->execute()) {
-                echo "Cart items have been cleared.";
+                // echo "Cart items have been cleared.";
             } else {
                 echo "Error clearing cart items.";
             }
@@ -49,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             $clear_cart_stmt->bind_param('s', $user_id);
 
             if ($clear_cart_stmt->execute()) {
-                echo "Cart items have been cleared.";
+                // echo "Cart items have been cleared.";
             } else {
                 echo "Error clearing cart items.";
             }
@@ -72,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             $clear_cart_stmt->bind_param('s', $user_id);
 
             if ($clear_cart_stmt->execute()) {
-                echo "Cart items have been cleared.";
+                // echo "Cart items have been cleared.";
             } else {
                 echo "Error clearing cart items.";
             }
@@ -95,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             $clear_cart_stmt->bind_param('s', $user_id);
 
             if ($clear_cart_stmt->execute()) {
-                echo "Cart items have been cleared.";
+                // echo "Cart items have been cleared.";
             } else {
                 echo "Error clearing cart items.";
             }
@@ -118,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             $clear_cart_stmt->bind_param('s', $user_id);
 
             if ($clear_cart_stmt->execute()) {
-                echo "Cart items have been cleared.";
+                // echo "Cart items have been cleared.";
             } else {
                 echo "Error clearing cart items.";
             }
@@ -141,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["payment_method"])) {
             $clear_cart_stmt->bind_param('s', $user_id);
 
             if ($clear_cart_stmt->execute()) {
-                echo "Cart items have been cleared.";
+                // echo "Cart items have been cleared.";
             } else {
                 echo "Error clearing cart items.";
             }

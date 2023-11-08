@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("location: home.php");
                 exit(); // Make sure to exit after redirecting
             } else {
-                echo "Incorrect password.";
+                $errorMessage = "Incorrect password.";
             }
         } else {
             $errorMessage = "Account does not exist";
